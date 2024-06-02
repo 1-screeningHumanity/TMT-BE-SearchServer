@@ -11,7 +11,6 @@ import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.method.annotation.HandlerMethodValidationException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 @RestControllerAdvice
@@ -41,23 +40,6 @@ public class ExceptionAdvice {
                 BaseResponseCode.VALIDATION_FAIL_ERROR.getHttpStatus(),
                 BaseResponseCode.VALIDATION_FAIL_ERROR.isSuccess(),
                 message,
-                BaseResponseCode.VALIDATION_FAIL_ERROR.getCode(),
-                null);
-
-        return new ResponseEntity<>(response, response.httpStatus());
-    }
-
-    /**
-     * @return Exception Response validation 관련 Error 사항을 응답합니다. 유효성 검증 실패. ex)@email 형식에 맞지 않음. 길이가
-     * 맞지 않음. 등등.
-     */
-    @ExceptionHandler(HandlerMethodValidationException.class)
-    public ResponseEntity<?> handlerValidationException(HandlerMethodValidationException e) {
-
-        BaseResponse<?> response = new BaseResponse<>(
-                BaseResponseCode.VALIDATION_FAIL_ERROR.getHttpStatus(),
-                BaseResponseCode.VALIDATION_FAIL_ERROR.isSuccess(),
-                e.getMessage(),
                 BaseResponseCode.VALIDATION_FAIL_ERROR.getCode(),
                 null);
 
