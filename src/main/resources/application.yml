@@ -6,6 +6,9 @@ spring:
 server:
   port: 0
 
+elasticsearch:
+  host : ${ELASTICSEARCH_HOST}
+
 #eureka
 eureka:
   instance:
