@@ -14,7 +14,7 @@ import org.springframework.http.HttpStatus;
  * 추가 기능 에러 :
  *      북마크 : 5000~5099
  *      구독 : 5100~5199
- *      {추가기능 발생 시} : 5200~5299
+ *      검색 : 5200~5299
  * 차트 에러 : 6000~6999
  * 공통 에러 : 9000~9999
  */
@@ -24,7 +24,8 @@ public enum BaseResponseCode {
     // Success
     SUCCESS(HttpStatus.OK, true, 200, "요청 응답 성공"),
 
-    // 매수/매도 에러
+    // 검색 에러
+    SEARCH_KEYWORD_IS_EMPTY(HttpStatus.BAD_REQUEST, false, 5200, "검색어는 1글자 이상입니다."),
 
     //공통 에러. 9000 ~ 9999
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, false, 9000, "서버 에러"),
