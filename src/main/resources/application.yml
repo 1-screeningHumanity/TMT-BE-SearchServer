@@ -14,11 +14,11 @@ eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
     hostname: search-server
-    client:
-      register-with-eureka: true
-      fetch-registry: true
-      service-url:
-        defaultZone: ${EUREKA_URl}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_URl}
 
 springdoc:
   packages-to-scan: ScreeningHumanity.SearchServer
