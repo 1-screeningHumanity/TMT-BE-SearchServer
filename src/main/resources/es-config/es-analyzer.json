@@ -1,0 +1,79 @@
+//PUT /member-mysql-logs
+{
+  "analysis": {
+    "tokenizer": {
+      "my_nori_tokenizer": {
+        "type": "nori_tokenizer",
+        "decompound_mode": "mixed",
+        "discard_punctuation": "false"
+      }
+    },
+    "filter": {
+      "my_stop_filter": {
+        "type": "stop",
+        "stopwords": [
+          " "
+        ]
+      }
+    },
+    "analyzer": {
+      "my_nori_analyzer": {
+        "type": "custom",
+        "tokenizer": "my_nori_tokenizer",
+        "filter": [
+          "lowercase",
+          "stop",
+          "my_stop_filter",
+          "nori_part_of_speech"
+        ],
+        "char_filter": [
+          "html_strip"
+        ]
+      }
+    }
+  }
+}
+
+curl -X PUT "http://localhost:9200/member-mysql-logs" -H "Content-Type: application/json" -d'
+{
+  "settings": {
+    "analysis": {
+      "tokenizer": {
+        "my_nori_tokenizer": {
+          "type": "nori_tokenizer",
+          "decompound_mode": "mixed",
+          "discard_punctuation": "false"
+        }
+      },
+      "filter": {
+        "my_stop_filter": {
+          "type": "stop",
+          "stopwords": [" "]
+        }
+      },
+      "analyzer": {
+        "my_nori_analyzer": {
+          "type": "custom",
+          "tokenizer": "my_nori_tokenizer",
+          "filter": [
+            "lowercase",
+            "stop",
+            "my_stop_filter",
+            "nori_part_of_speech"
+          ],
+          "char_filter": ["html_strip"]
+        }
+      }
+    }
+  }
+}'
+
+//CURL 명렁어
+//전체 삭제
+//curl -X POST "http://localhost:9200/member-mysql-logs-*/_delete_by_query" -H "Content-Type: application/json" -d'
+//{
+//  "query": {
+//    "match_all": {}
+//  }
+//}'
+//__________
