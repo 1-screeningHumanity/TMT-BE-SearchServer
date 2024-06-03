@@ -20,7 +20,7 @@ public class CompanySearchController {
 
     @Operation(summary = "종목명 키워드 조회 api", description = "종목명을 키워드로 조회 합니다.")
     @GetMapping("/stocks")
-    public BaseResponse<List<CompanyInfoSearchOutDto>> memberSearchByKeyword(
+    public BaseResponse<List<CompanyInfoSearchOutDto>> companyInfoSearchByKeyword(
             @RequestParam(value = "searchName", required = true) String searchName
     ) {
         List<CompanyInfoSearchOutDto> findResult = companySearchUseCase.companyInfoSearchByKeyword(
