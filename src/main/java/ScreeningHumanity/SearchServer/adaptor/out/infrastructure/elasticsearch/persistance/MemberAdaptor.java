@@ -49,11 +49,18 @@ public class MemberAdaptor implements LoadMemberSearchPort {
                                                 .fuzziness("AUTO")
                                 )
                         )
-                        .filter(filterQuery -> filterQuery
+//                        .filter(filterQuery -> filterQuery
+//                                .term(termQuery ->
+//                                        termQuery
+//                                                .field("status.keyword")
+//                                                .value("SIGNUP")
+//                                )
+//                        )
+                        .mustNot(mustNotQuery -> mustNotQuery
                                 .term(termQuery ->
                                         termQuery
                                                 .field("status.keyword")
-                                                .value("SIGNUP")
+                                                .value("OUT")
                                 )
                         )
                         .minimumShouldMatch("1")
