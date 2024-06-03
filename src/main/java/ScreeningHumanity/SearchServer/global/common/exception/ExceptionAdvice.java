@@ -114,7 +114,6 @@ public class ExceptionAdvice {
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> commonException(Exception e) {
-        //로깅
         log.info("처리되지 않은 예외 발생. Message = {}", e.getMessage());
         BaseResponse<?> response = new BaseResponse<>(
                 BaseResponseCode.INTERNAL_SERVER_ERROR.getHttpStatus(),
