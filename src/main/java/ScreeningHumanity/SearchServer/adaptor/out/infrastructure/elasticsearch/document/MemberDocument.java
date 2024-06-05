@@ -13,7 +13,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.elasticsearch.annotations.Setting;
 
 @Document(indexName = "member-mysql-logs-*")
-@Setting(settingPath = "es-config/es-analyzer.json")
+//@Setting(settingPath = "es-config/es-analyzer.json")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
