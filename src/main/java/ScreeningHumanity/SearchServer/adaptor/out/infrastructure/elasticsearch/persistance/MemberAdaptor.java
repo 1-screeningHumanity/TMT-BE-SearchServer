@@ -15,6 +15,7 @@ import org.springframework.data.elasticsearch.client.elc.NativeQuery;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.query.SearchTemplateQueryBuilder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -33,8 +34,8 @@ public class MemberAdaptor implements LoadMemberSearchPort {
     @Override
     public List<MemberSearchOutDto> LoadMemberByKeyword(String keyword) {
         String todayDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
-        String indexNameToday = "member-mysql-logs-"
-                + todayDate; //todo : 코드 스멜로 전역 변수 관리하도록 수정 예정. + MemberDocument
+        String indexNameToday = "member-mysql-logs-" + todayDate;
+        //todo : 코드 스멜로 전역 변수 관리하도록 수정 예정. + MemberDocument
 
         String wildcardKeyword = "*" + keyword + "*"; // 키워드 앞뒤로 와일드카드를 추가
         Query query = QueryBuilders.bool(boolQuery ->
@@ -72,6 +73,8 @@ public class MemberAdaptor implements LoadMemberSearchPort {
         );
 
         NativeQuery nativeQuery = NativeQuery.builder().withQuery(query).build();
+        nativeQuery.setMaxResults(500); //max Result 설정.
+
         SearchHits<MemberDocument> result = elasticsearchOperations.search(nativeQuery,
                 MemberDocument.class);
 
