@@ -45,6 +45,8 @@ public class CompanyAdaptor implements LoadCompanyInfoSearchPort {
         );
 
         NativeQuery nativeQuery = NativeQuery.builder().withQuery(query).build();
+        nativeQuery.setMaxResults(500); //max Result 설정.
+
         SearchHits<CompanyInfoDocument> result = elasticsearchOperations.search(nativeQuery,
                 CompanyInfoDocument.class);
 
