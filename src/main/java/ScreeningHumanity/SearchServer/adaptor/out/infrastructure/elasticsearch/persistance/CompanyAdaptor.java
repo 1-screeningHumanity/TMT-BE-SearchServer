@@ -37,6 +37,7 @@ public class CompanyAdaptor implements LoadCompanyInfoSearchPort {
                                         wildcardQuery
                                                 .field("name")
                                                 .value(wildcardKeyword)
+                                                .caseInsensitive(true)
                                 )
                         )
                         .should(shouldQuery -> shouldQuery

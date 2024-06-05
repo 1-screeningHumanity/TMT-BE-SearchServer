@@ -45,6 +45,7 @@ public class MemberAdaptor implements LoadMemberSearchPort {
                                         wildcardQuery
                                                 .field("nickname")
                                                 .value(wildcardKeyword)
+                                                .caseInsensitive(true)
                                 )
                         )
                         .should(shouldQuery -> shouldQuery
