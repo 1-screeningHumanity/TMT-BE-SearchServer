@@ -21,7 +21,7 @@ public class MemberSearchController {
     @Operation(summary = "회원 키워드 조회 api", description = "회원이름을 키워드로 조회 합니다.")
     @GetMapping("/members")
     public BaseResponse<List<MemberSearchOutDto>> memberSearchByKeyword(
-            @RequestParam(value = "searchName", required = true) String searchName
+            @RequestParam(value = "searchName", required = false) String searchName
     ){
         List<MemberSearchOutDto> findResult = memberSearchUseCase.MemberSearchByKeyword(
                 searchName);
