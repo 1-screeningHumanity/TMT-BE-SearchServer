@@ -5,6 +5,8 @@ import ScreeningHumanity.SearchServer.application.port.out.outdto.CompanyInfoSea
 import ScreeningHumanity.SearchServer.application.port.out.outport.LoadCompanyInfoSearchPort;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +25,11 @@ public class CompanyAdaptor implements LoadCompanyInfoSearchPort {
 
     @Override
     public List<CompanyInfoSearchOutDto> loadCompanyInfoByKeyword(String keyword) {
-        String wildcardKeyword = "*" + keyword + "*"; // 키워드 앞뒤로 와일드카드를 추가
+        String todayDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
+        String indexNameToday = "company-info-logs-" + todayDate;
+        //todo : 코드 스멜로 전역 변수 관리하도록 수정 예정. + Document
+
+        String wildcardKeyword = "*" + keyword + "*";
         Query query = QueryBuilders.bool(boolQuery ->
                 boolQuery
                         .should(shouldQuery -> shouldQuery
@@ -39,6 +45,13 @@ public class CompanyAdaptor implements LoadCompanyInfoSearchPort {
                                                 .field("name")
                                                 .value(keyword)
                                                 .fuzziness("AUTO")
+                                )
+                        )
+                        .filter(filterQuery -> filterQuery
+                                .term(termQuery ->
+                                        termQuery
+                                                .field("_index")
+                                                .value(indexNameToday)
                                 )
                         )
                         .minimumShouldMatch("1")
