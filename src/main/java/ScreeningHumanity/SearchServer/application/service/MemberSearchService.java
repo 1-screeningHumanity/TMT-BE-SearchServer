@@ -16,7 +16,6 @@ public class MemberSearchService implements MemberSearchUseCase {
 
     @Override
     public List<MemberSearchOutDto> MemberSearchByKeyword(String keyword) {
-        //검색 키워드는 공백 제외 1글자 이상 필요.
         if (keyword == null || keyword.trim().isEmpty()) {
             return new ArrayList<>();
         }
