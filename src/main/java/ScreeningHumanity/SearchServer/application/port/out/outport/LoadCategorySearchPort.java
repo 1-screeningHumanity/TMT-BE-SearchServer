@@ -5,4 +5,6 @@ import java.util.List;
 
 public interface LoadCategorySearchPort {
     List<CategoryOutDto.MainCategory> loadMainCategory();
+
+    List<CategoryOutDto.SubCategory> loadSubCategory(String mainCategoryId);
 }

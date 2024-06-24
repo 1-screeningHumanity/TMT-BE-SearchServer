@@ -1,5 +1,6 @@
 package ScreeningHumanity.SearchServer.application.port.out.outvo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,8 +14,13 @@ public class CategoryOutVo {
     @NoArgsConstructor
     public static class MainCategory {
 
+        @JsonProperty(value = "categoryId")
         private Long id;
+
+        @JsonProperty(value = "categoryName")
         private String name;
+
+        @JsonProperty(value = "img_url")
         private String image;
     }
 
@@ -24,7 +30,14 @@ public class CategoryOutVo {
     @NoArgsConstructor
     public static class SubCategory {
 
-        private Boolean isSubscribe;
+        @JsonProperty(value = "categoryId")
+        private Long id;
+
+        @JsonProperty(value = "categoryName")
+        private String name;
+
+        @JsonProperty(value = "img_url")
+        private String image;
     }
 
     @Getter

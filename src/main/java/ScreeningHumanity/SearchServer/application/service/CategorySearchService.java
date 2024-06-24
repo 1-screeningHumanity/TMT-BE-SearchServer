@@ -30,7 +30,16 @@ public class CategorySearchService implements CategorySearchUseCase {
 
     @Override
     public List<CategoryOutVo.SubCategory> searchSubCategory(String mainCategoryId) {
-        return null;
+        List<CategoryOutDto.SubCategory> findData = loadCategorySearchPort.loadSubCategory(
+                mainCategoryId);
+
+        return findData.stream().map(
+                data -> CategoryOutVo.SubCategory
+                        .builder()
+                        .id(data.getId())
+                        .name(data.getName())
+                        .image(data.getImage())
+                        .build()).collect(Collectors.toList());
     }
 
     @Override

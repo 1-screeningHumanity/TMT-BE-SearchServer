@@ -26,6 +26,7 @@ public enum BaseResponseCode {
 
     // 검색 에러
     SEARCH_KEYWORD_IS_EMPTY(HttpStatus.BAD_REQUEST, false, 5200, "검색어는 1글자 이상입니다."),
+    SEARCH_SUB_CATEGORY_MAIN_CATEGORY_ID_EMPTY(HttpStatus.BAD_REQUEST, false, 5201, "Main Category ID 값이 잘못 되었습니다."),
 
     //공통 에러. 9000 ~ 9999
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, false, 9000, "서버 에러"),

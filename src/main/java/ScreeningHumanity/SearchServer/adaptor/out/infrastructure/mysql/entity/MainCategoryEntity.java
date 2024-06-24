@@ -21,12 +21,12 @@ public class MainCategoryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "main_category_id")
+    @Column(name = "main_category_id", nullable = false)
     private Long id;
 
-    @Column(name = "main_category_name")
+    @Column(name = "main_category_name", nullable = false)
     private String name;
 
-    @Column(name = "main_category_image")
+    @Column(name = "main_category_image", nullable = false)
     private String image;
 }

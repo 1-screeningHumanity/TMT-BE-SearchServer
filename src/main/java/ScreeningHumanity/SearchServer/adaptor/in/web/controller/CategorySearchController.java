@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -18,9 +19,20 @@ public class CategorySearchController {
     private final CategorySearchUseCase categorySearchUseCase;
 
     @Operation(summary = "Main Category 조회 api", description = "Main Category 조회 API")
-    @GetMapping("/subscribe")
-    private BaseResponse<List<CategoryOutVo.MainCategory>> subscribeMember(){
+    @GetMapping("/categories")
+    private BaseResponse<List<CategoryOutVo.MainCategory>> searchMainCategory(){
         List<CategoryOutVo.MainCategory> findData = categorySearchUseCase.searchMainCategory();
+
+        return new BaseResponse<>(findData);
+    }
+
+    @Operation(summary = "Sub Category 조회 api", description = "Main Category Id로 Sub Category 리스트를 조회 합니다.")
+    @GetMapping("/maincategories/{mainCategoryId}/subcategory")
+    private BaseResponse<List<CategoryOutVo.SubCategory>> searchSubCategoryByMainCategoryId(
+            @PathVariable(value = "mainCategoryId") String mainCategoryId
+    ){
+        List<CategoryOutVo.SubCategory> findData = categorySearchUseCase.searchSubCategory(
+                mainCategoryId);
 
         return new BaseResponse<>(findData);
     }

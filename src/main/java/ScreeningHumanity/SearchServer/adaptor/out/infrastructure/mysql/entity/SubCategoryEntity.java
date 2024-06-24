@@ -23,13 +23,13 @@ import lombok.NoArgsConstructor;
 public class SubCategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sub_category_id")
+    @Column(name = "sub_category_id", nullable = false)
     private Long id;
 
-    @Column(name = "sub_category_name")
+    @Column(name = "sub_category_name", nullable = false)
     private String name;
 
-    @Column(name = "sub_category_image")
+    @Column(name = "sub_category_image", nullable = true)
     private String image;
 
     @ManyToOne(fetch = FetchType.LAZY)
