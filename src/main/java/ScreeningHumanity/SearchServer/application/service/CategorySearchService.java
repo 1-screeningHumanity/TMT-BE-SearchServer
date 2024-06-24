@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +18,7 @@ public class CategorySearchService implements CategorySearchUseCase {
     private final LoadCategorySearchPort loadCategorySearchPort;
     private final LoadCategorySearchListPort loadCategorySearchListPort;
 
+    @Transactional(readOnly = true)
     @Override
     public List<CategoryOutVo.MainCategory> searchMainCategory() {
         List<CategoryOutDto.MainCategory> findData = loadCategorySearchPort.loadMainCategory();
@@ -30,6 +32,7 @@ public class CategorySearchService implements CategorySearchUseCase {
                         .build()).collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<CategoryOutVo.SubCategory> searchSubCategory(String mainCategoryId) {
         List<CategoryOutDto.SubCategory> findData = loadCategorySearchPort.loadSubCategory(
