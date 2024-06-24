@@ -1,6 +1,20 @@
 spring:
   application:
     name: search-server
+  datasource:
+    url: ${SEARCH_DB}
+    username: ${SEARCH_DB_USER}
+    password: ${SEARCH_DB_PW}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    mongodb:
+      uri: ${READ_ONLY_DB_MONGO}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
 
 #RAMDOM PORT
 server:
