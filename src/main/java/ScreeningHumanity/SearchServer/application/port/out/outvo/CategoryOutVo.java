@@ -46,6 +46,8 @@ public class CategoryOutVo {
     @NoArgsConstructor
     public static class StockList {
 
-        private Boolean isSubscribe;
+        private Long id;
+        private String stockCode;
+        private String stockName;
     }
 }

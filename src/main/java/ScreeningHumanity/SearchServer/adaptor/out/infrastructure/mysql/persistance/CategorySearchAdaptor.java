@@ -50,5 +50,4 @@ public class CategorySearchAdaptor implements LoadCategorySearchPort {
                         .image(data.getImage())
                         .build()).collect(Collectors.toList());
     }
-
 }

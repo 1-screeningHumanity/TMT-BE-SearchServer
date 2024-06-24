@@ -32,8 +32,9 @@ public class CategoryOutDto {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class StockList {
+
         private Long id;
-        private String name;
-        private String image;
+        private String stockCode;
+        private String stockName;
     }
 }

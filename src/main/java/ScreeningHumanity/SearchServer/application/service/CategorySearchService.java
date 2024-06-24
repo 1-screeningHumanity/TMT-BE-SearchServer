@@ -2,6 +2,7 @@ package ScreeningHumanity.SearchServer.application.service;
 
 import ScreeningHumanity.SearchServer.application.port.in.usecase.CategorySearchUseCase;
 import ScreeningHumanity.SearchServer.application.port.out.outdto.CategoryOutDto;
+import ScreeningHumanity.SearchServer.application.port.out.outport.LoadCategorySearchListPort;
 import ScreeningHumanity.SearchServer.application.port.out.outport.LoadCategorySearchPort;
 import ScreeningHumanity.SearchServer.application.port.out.outvo.CategoryOutVo;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class CategorySearchService implements CategorySearchUseCase {
 
     private final LoadCategorySearchPort loadCategorySearchPort;
+    private final LoadCategorySearchListPort loadCategorySearchListPort;
 
     @Override
     public List<CategoryOutVo.MainCategory> searchMainCategory() {
@@ -44,6 +46,14 @@ public class CategorySearchService implements CategorySearchUseCase {
 
     @Override
     public List<CategoryOutVo.StockList> searchStockListByCategory(String subCategoryId) {
-        return null;
+        List<CategoryOutDto.StockList> findData = loadCategorySearchListPort.loadStockInformation(subCategoryId);
+
+        return findData.stream().map(
+                data -> CategoryOutVo.StockList
+                        .builder()
+                        .id(data.getId())
+                        .stockCode(data.getStockCode())
+                        .stockName(data.getStockName())
+                        .build()).collect(Collectors.toList());
     }
 }
