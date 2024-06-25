@@ -1,6 +1,7 @@
 package ScreeningHumanity.SearchServer.application.port.out.outvo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -44,10 +45,29 @@ public class CategoryOutVo {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
+    public static class ResponseSubCategory {
+        private String mainCategoryName;
+        private List<SubCategory> categoryData;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class StockList {
 
         private Long id;
         private String stockCode;
         private String stockName;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class ResponseStockList {
+        private String mainCategoryName;
+        private String subCategoryName;
+        private List<StockList> stockData;
     }
 }

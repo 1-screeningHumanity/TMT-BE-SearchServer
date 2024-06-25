@@ -34,29 +34,47 @@ public class CategorySearchService implements CategorySearchUseCase {
 
     @Transactional(readOnly = true)
     @Override
-    public List<CategoryOutVo.SubCategory> searchSubCategory(String mainCategoryId) {
+    public CategoryOutVo.ResponseSubCategory searchSubCategory(String mainCategoryId) {
         List<CategoryOutDto.SubCategory> findData = loadCategorySearchPort.loadSubCategory(
                 mainCategoryId);
 
-        return findData.stream().map(
+        //main 카테고리 이름 조회.
+        String mainCategoryName = loadCategorySearchPort.loadMainCategoryName(mainCategoryId);
+
+        List<CategoryOutVo.SubCategory> collect = findData.stream().map(
                 data -> CategoryOutVo.SubCategory
                         .builder()
                         .id(data.getId())
                         .name(data.getName())
                         .image(data.getImage())
                         .build()).collect(Collectors.toList());
+
+        return CategoryOutVo.ResponseSubCategory
+                .builder()
+                .categoryData(collect)
+                .mainCategoryName(mainCategoryName)
+                .build();
     }
 
     @Override
-    public List<CategoryOutVo.StockList> searchStockListByCategory(String subCategoryId) {
+    public CategoryOutVo.ResponseStockList searchStockListByCategory(String subCategoryId) {
         List<CategoryOutDto.StockList> findData = loadCategorySearchListPort.loadStockInformation(subCategoryId);
+        CategoryOutDto.CategoryName categoryName = loadCategorySearchPort.loadSubCategoryNames(
+                subCategoryId);
 
-        return findData.stream().map(
+        List<CategoryOutVo.StockList> collect = findData.stream().map(
                 data -> CategoryOutVo.StockList
                         .builder()
                         .id(data.getId())
                         .stockCode(data.getStockCode())
                         .stockName(data.getStockName())
                         .build()).collect(Collectors.toList());
+
+        return CategoryOutVo.ResponseStockList
+                .builder()
+                .mainCategoryName(categoryName.getMainCategoryName())
+                .subCategoryName(categoryName.getSubCategoryName())
+                .stockData(collect)
+                .build();
     }
 }

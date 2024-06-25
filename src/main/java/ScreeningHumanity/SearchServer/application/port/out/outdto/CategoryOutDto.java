@@ -37,4 +37,14 @@ public class CategoryOutDto {
         private String stockCode;
         private String stockName;
     }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class CategoryName {
+
+        private String mainCategoryName;
+        private String subCategoryName;
+    }
 }

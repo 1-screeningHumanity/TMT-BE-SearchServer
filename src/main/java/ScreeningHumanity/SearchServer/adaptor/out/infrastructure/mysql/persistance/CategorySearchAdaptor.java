@@ -34,6 +34,31 @@ public class CategorySearchAdaptor implements LoadCategorySearchPort {
     }
 
     @Override
+    public String loadMainCategoryName(String mainCategoryId) {
+        MainCategoryEntity mainCategoryEntity = mainCategoryJpaRepository.findById(Long.parseLong(mainCategoryId))
+                .orElseThrow(
+                        () -> new CustomException(
+                                BaseResponseCode.SEARCH_SUB_CATEGORY_MAIN_CATEGORY_ID_EMPTY)
+                );
+        return mainCategoryEntity.getName();
+    }
+
+    @Override
+    public CategoryOutDto.CategoryName loadSubCategoryNames(String subCategoryId) {
+        SubCategoryEntity subCategoryEntity = subCategoryJpaRepository.findById(Long.parseLong(subCategoryId))
+                .orElseThrow(
+                        () -> new CustomException(
+                                BaseResponseCode.SEARCH_SUB_CATEGORY_SUB_CATEGORY_ID_EMPTY)
+                );
+
+        return CategoryOutDto.CategoryName
+                .builder()
+                .mainCategoryName(subCategoryEntity.getMainCategory().getName())
+                .subCategoryName(subCategoryEntity.getName())
+                .build();
+    }
+
+    @Override
     public List<CategoryOutDto.SubCategory> loadSubCategory(String mainCategoryId) {
         MainCategoryEntity findMainCategoryData = mainCategoryJpaRepository.findById(Long.parseLong(mainCategoryId))
                 .orElseThrow(
