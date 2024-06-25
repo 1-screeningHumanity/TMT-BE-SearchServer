@@ -61,6 +61,9 @@ dependencies {
 	// Feign
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
+	//Jsoup
+	implementation 'org.jsoup:jsoup:1.14.2'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
