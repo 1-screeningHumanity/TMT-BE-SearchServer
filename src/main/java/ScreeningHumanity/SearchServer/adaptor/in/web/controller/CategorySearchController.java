@@ -28,13 +28,13 @@ public class CategorySearchController {
 
     @Operation(summary = "Sub Category 조회 api", description = "Main Category Id로 Sub Category 리스트를 조회 합니다.")
     @GetMapping("/maincategories/{mainCategoryId}/subcategory")
-    private BaseResponse<List<CategoryOutVo.SubCategory>> searchSubCategoryByMainCategoryId(
+    private BaseResponse<CategoryOutVo.ResponseSubCategory> searchSubCategoryByMainCategoryId(
             @PathVariable(value = "mainCategoryId") String mainCategoryId
     ){
-        List<CategoryOutVo.SubCategory> findData = categorySearchUseCase.searchSubCategory(
+        CategoryOutVo.ResponseSubCategory responseSubCategory = categorySearchUseCase.searchSubCategory(
                 mainCategoryId);
 
-        return new BaseResponse<>(findData);
+        return new BaseResponse<>(responseSubCategory);
     }
 
     @Operation(summary = "Sub Category 의 종목 조회 api", description = "Category Id로 종목의 리스트를 조회 합니다.")

@@ -34,17 +34,26 @@ public class CategorySearchService implements CategorySearchUseCase {
 
     @Transactional(readOnly = true)
     @Override
-    public List<CategoryOutVo.SubCategory> searchSubCategory(String mainCategoryId) {
+    public CategoryOutVo.ResponseSubCategory searchSubCategory(String mainCategoryId) {
         List<CategoryOutDto.SubCategory> findData = loadCategorySearchPort.loadSubCategory(
                 mainCategoryId);
 
-        return findData.stream().map(
+        //main 카테고리 이름 조회.
+        String mainCategoryName = loadCategorySearchPort.loadMainCategoryName(mainCategoryId);
+
+        List<CategoryOutVo.SubCategory> collect = findData.stream().map(
                 data -> CategoryOutVo.SubCategory
                         .builder()
                         .id(data.getId())
                         .name(data.getName())
                         .image(data.getImage())
                         .build()).collect(Collectors.toList());
+
+        return CategoryOutVo.ResponseSubCategory
+                .builder()
+                .categoryData(collect)
+                .mainCategoryName(mainCategoryName)
+                .build();
     }
 
     @Override
