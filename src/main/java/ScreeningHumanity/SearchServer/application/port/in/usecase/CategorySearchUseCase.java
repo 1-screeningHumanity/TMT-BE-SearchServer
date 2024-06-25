@@ -9,5 +9,5 @@ public interface CategorySearchUseCase {
 
     CategoryOutVo.ResponseSubCategory searchSubCategory(String mainCategoryId);
 
-    List<CategoryOutVo.StockList> searchStockListByCategory(String subCategoryId);
+    CategoryOutVo.ResponseStockList searchStockListByCategory(String subCategoryId);
 }

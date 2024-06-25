@@ -60,4 +60,14 @@ public class CategoryOutVo {
         private String stockCode;
         private String stockName;
     }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class ResponseStockList {
+        private String mainCategoryName;
+        private String subCategoryName;
+        private List<StockList> stockData;
+    }
 }

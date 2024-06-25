@@ -39,10 +39,10 @@ public class CategorySearchController {
 
     @Operation(summary = "Sub Category 의 종목 조회 api", description = "Category Id로 종목의 리스트를 조회 합니다.")
     @GetMapping("/subcategories/{subCategoryId}/items")
-    private BaseResponse<List<CategoryOutVo.StockList>> searchStocksBySubCategoryId(
+    private BaseResponse<CategoryOutVo.ResponseStockList> searchStocksBySubCategoryId(
             @PathVariable(value = "subCategoryId") String subCategoryId
     ){
-        List<CategoryOutVo.StockList> findData = categorySearchUseCase.searchStockListByCategory(
+        CategoryOutVo.ResponseStockList findData = categorySearchUseCase.searchStockListByCategory(
                 subCategoryId);
         return new BaseResponse<>(findData);
     }

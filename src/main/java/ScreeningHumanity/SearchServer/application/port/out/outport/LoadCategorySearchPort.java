@@ -9,5 +9,7 @@ public interface LoadCategorySearchPort {
 
     String loadMainCategoryName(String mainCategoryId);
 
+    CategoryOutDto.CategoryName loadSubCategoryNames(String subCategoryId);
+
     List<CategoryOutDto.SubCategory> loadSubCategory(String mainCategoryId);
 }

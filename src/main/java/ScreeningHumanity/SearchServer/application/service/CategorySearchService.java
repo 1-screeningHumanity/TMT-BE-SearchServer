@@ -57,15 +57,24 @@ public class CategorySearchService implements CategorySearchUseCase {
     }
 
     @Override
-    public List<CategoryOutVo.StockList> searchStockListByCategory(String subCategoryId) {
+    public CategoryOutVo.ResponseStockList searchStockListByCategory(String subCategoryId) {
         List<CategoryOutDto.StockList> findData = loadCategorySearchListPort.loadStockInformation(subCategoryId);
+        CategoryOutDto.CategoryName categoryName = loadCategorySearchPort.loadSubCategoryNames(
+                subCategoryId);
 
-        return findData.stream().map(
+        List<CategoryOutVo.StockList> collect = findData.stream().map(
                 data -> CategoryOutVo.StockList
                         .builder()
                         .id(data.getId())
                         .stockCode(data.getStockCode())
                         .stockName(data.getStockName())
                         .build()).collect(Collectors.toList());
+
+        return CategoryOutVo.ResponseStockList
+                .builder()
+                .mainCategoryName(categoryName.getMainCategoryName())
+                .subCategoryName(categoryName.getSubCategoryName())
+                .stockData(collect)
+                .build();
     }
 }
