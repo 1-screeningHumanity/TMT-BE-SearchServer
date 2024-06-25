@@ -1,4 +1,4 @@
-package ScreeningHumanity.SearchServer.global.feignclient.vo;
+package ScreeningHumanity.SearchServer.application.port.out.outvo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class NewsItem {
+public class NewsOutVo {
+
+    private Long id;
     private String title;
+    private String description;
     private String originallink;
     private String link;
-    private String description;
     private String pubDate;
+    private String image;
 }

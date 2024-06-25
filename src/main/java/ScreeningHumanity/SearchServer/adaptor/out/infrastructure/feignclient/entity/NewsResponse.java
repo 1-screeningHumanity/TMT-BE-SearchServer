@@ -1,4 +1,4 @@
-package ScreeningHumanity.SearchServer.global.feignclient.vo;
+package ScreeningHumanity.SearchServer.adaptor.out.infrastructure.feignclient.entity;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
