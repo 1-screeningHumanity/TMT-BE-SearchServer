@@ -13,9 +13,9 @@ Logstash를 활용한 데이터 수집 파이프라인과 Elastic Search를 사�
 
 ## 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Running
 <p float="left">
-    <img src="https://i.ibb.co/TgNhXCD/1.png" width=200 />
-    <img src="https://i.ibb.co/TgNhXCD/1.png" width=200 />
-    <img src="https://i.ibb.co/TgNhXCD/1.png" width=200 />
+    <img src="https://i.ibb.co/Lp2pdHX/1.png" width=200 />
+    <img src="https://i.ibb.co/0C6hBdC/2.png" width=200 />
+    <img src="https://i.ibb.co/879WgMV/3.png" width=200 />
     <img src="https://i.ibb.co/zS47pZH/image.png" width=200 />
 </p>
    
