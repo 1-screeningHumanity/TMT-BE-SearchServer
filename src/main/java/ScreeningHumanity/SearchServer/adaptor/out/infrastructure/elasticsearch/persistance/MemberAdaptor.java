@@ -6,6 +6,7 @@ import ScreeningHumanity.SearchServer.application.port.out.outport.LoadMemberSea
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,9 +34,9 @@ public class MemberAdaptor implements LoadMemberSearchPort {
      */
     @Override
     public List<MemberSearchOutDto> LoadMemberByKeyword(String keyword) {
-        String todayDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
+        LocalDateTime date = LocalDateTime.now().minusHours(9);
+        String todayDate = date.toLocalDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
         String indexNameToday = "member-mysql-logs-" + todayDate;
-        //todo : 코드 스멜로 전역 변수 관리하도록 수정 예정. + MemberDocument
 
         String wildcardKeyword = "*" + keyword + "*"; // 키워드 앞뒤로 와일드카드를 추가
         Query query = QueryBuilders.bool(boolQuery ->
