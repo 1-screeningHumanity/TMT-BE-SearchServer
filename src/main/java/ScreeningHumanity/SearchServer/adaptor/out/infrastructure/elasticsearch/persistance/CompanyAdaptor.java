@@ -6,6 +6,7 @@ import ScreeningHumanity.SearchServer.application.port.out.outport.LoadCompanyIn
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,9 +26,9 @@ public class CompanyAdaptor implements LoadCompanyInfoSearchPort {
 
     @Override
     public List<CompanyInfoSearchOutDto> loadCompanyInfoByKeyword(String keyword) {
-        String todayDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
+        LocalDateTime date = LocalDateTime.now().minusHours(9);
+        String todayDate = date.toLocalDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
         String indexNameToday = "company-info-logs-" + todayDate;
-        //todo : 코드 스멜로 전역 변수 관리하도록 수정 예정. + Document
 
         String wildcardKeyword = "*" + keyword + "*";
         Query query = QueryBuilders.bool(boolQuery ->
