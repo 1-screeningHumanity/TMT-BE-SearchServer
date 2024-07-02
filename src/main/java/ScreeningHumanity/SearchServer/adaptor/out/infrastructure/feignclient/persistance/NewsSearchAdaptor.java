@@ -46,7 +46,7 @@ public class NewsSearchAdaptor implements LoadNewsSearchPort {
                         .originallink(data.getOriginallink())
                         .link(data.getLink())
                         .pubDate(data.getPubDate())
-                        .image(getMetaData(data.getOriginallink()))
+                        .image(getMetaData(data.getOriginallink()) == null ? "https://i.ibb.co/DGk5wK7/TMT.png" : getMetaData(data.getOriginallink()))
                         .build()).collect(Collectors.toList());
     }
 
