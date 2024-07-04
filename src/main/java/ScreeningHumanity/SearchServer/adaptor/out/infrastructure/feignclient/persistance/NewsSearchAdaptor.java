@@ -38,6 +38,26 @@ public class NewsSearchAdaptor implements LoadNewsSearchPort {
         AtomicLong atomicLong = new AtomicLong(1L);
 
         return newsResponse.getItems().stream().map(
+                data -> {
+                    String metaDataImage = getMetaData(data.getOriginallink());
+                    String finalImage = (metaDataImage == null || !metaDataImage.startsWith("https"))
+                            ? "https://i.ibb.co/DGk5wK7/TMT.png"
+                            : metaDataImage;
+
+                    return NewsSearchOutDto
+                            .builder()
+                            .id(atomicLong.getAndIncrement())
+                            .title(data.getTitle())
+                            .description(data.getDescription())
+                            .originallink(data.getOriginallink())
+                            .link(data.getLink())
+                            .pubDate(data.getPubDate())
+                            .image(finalImage)
+                            .build();
+                }).collect(Collectors.toList());
+
+        /*//메타데이터 추출 시, http 로 오는 경우도 있어. 예외 추가 처리.
+        return newsResponse.getItems().stream().map(
                 data -> NewsSearchOutDto
                         .builder()
                         .id(atomicLong.getAndIncrement())
@@ -48,6 +68,7 @@ public class NewsSearchAdaptor implements LoadNewsSearchPort {
                         .pubDate(data.getPubDate())
                         .image(getMetaData(data.getOriginallink()) == null ? "https://i.ibb.co/DGk5wK7/TMT.png" : getMetaData(data.getOriginallink()))
                         .build()).collect(Collectors.toList());
+         */
     }
 
     private String getMetaData(String url) {
